@@ -1,4 +1,4 @@
-# Kali Linux desktop on the browser (x86_64)
+# Kali Linux desktop on the browser (ARM64 and x86_64)
 
 This repository contains a Docker Compose application that runs single containers to provide a kali linux desktop on the browser.
 
