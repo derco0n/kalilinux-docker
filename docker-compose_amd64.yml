@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  kalilinux:
+    hostname: kalilinux.lab
+    build:
+      context: .
+      dockerfile: Dockerfile_amd64
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 0.0.0.0:8080:8080
+      - 0.0.0.0:2222:22
+    environment:
+      - SHELL=/bin/bash
+      - PASSWORD=${PASSWORD:-kalilinux}
+    volumes:
+      - data:/home/kali/Desktop
+    entrypoint: ["/bin/bash", "/startup.sh"]
+
+volumes:
+  data: {}
