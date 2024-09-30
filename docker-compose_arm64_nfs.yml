@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  kalilinux:
+    hostname: kalilinux.lab
+    build:
+      context: /opt/containers/kali-docker
+      dockerfile: Dockerfile_arm64
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8080:8080
+      - 2222:22
+    environment:
+      - SHELL=/bin/bash
+      - PASSWORD=${PASSWORD:-kalilinux}
+    volumes:
+      - mydata:/home/kali/my_data
+    entrypoint: ["/bin/bash", "/startup.sh"]
+
+# adding an nfs-share for persistant-data
+volumes:
+  mydata:
+      driver: local
+      driver_opts:
+        type: "nfs"
+        o: "nfsvers=3,addr=10.10.0.128,rw"
+        device: ":/volume1/somehost/someshare/kali-docker/mydata"
