@@ -3,7 +3,7 @@ services:
   kalilinux:
     hostname: kalilinux.lab
     build:
-      context: /opt/containers/kali-docker
+      context: .
       dockerfile: Dockerfile_arm64
     restart: unless-stopped
     cap_add:
